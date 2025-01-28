@@ -4,44 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Quote Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        #quoteDisplay {
-            margin: 20px 0;
-            font-size: 1.5rem;
-            font-style: italic;
-            color: #555;
-        }
-        form {
-            margin-top: 20px;
-        }
-        input {
-            margin: 5px;
-            padding: 10px;
-            font-size: 1rem;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <h1>Dynamic Quote Generator</h1>
-    <div id="quoteDisplay">Click "Show New Quote" to see a random quote!</div>
+    
+    <!-- Display Quote -->
+    <div id="quoteDisplay"></div>
+    
+    <!-- Show New Quote Button -->
     <button id="newQuote">Show New Quote</button>
-
-    <h2>Add a New Quote</h2>
-    <form id="addQuoteForm">
-        <input id="newQuoteText" type="text" placeholder="Enter a new quote" required />
-        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" required />
-        <button type="submit">Add Quote</button>
-    </form>
+    
+    <!-- Export and Import Buttons -->
+    <button id="exportButton">Export Quotes</button>
+    <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
 
     <script src="script.js"></script>
 </body>
