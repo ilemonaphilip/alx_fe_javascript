@@ -48,6 +48,15 @@ function displayQuotes(filteredQuotes) {
     });
 }
 
+// Function to display a random quote from the filtered list
+function showRandomQuote(filteredQuotes) {
+    const randomIndex = Math.floor(Math.random() * filteredQuotes.length);  // Generate a random index
+    const randomQuote = filteredQuotes[randomIndex];  // Get a random quote
+
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    quoteDisplay.innerHTML = `"${randomQuote.text}" - ${randomQuote.category}`;
+}
+
 // Function to add a new quote (also updates categories)
 function addQuote() {
     const newQuoteText = document.getElementById('newQuoteText').value;
@@ -94,5 +103,13 @@ function importFromJsonFile(event) {
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
     populateCategories();
+
+    // Show a random quote when the "Show New Quote" button is clicked
+    document.getElementById('newQuote').addEventListener('click', () => {
+        const selectedCategory = document.getElementById('categoryFilter').value;
+        const filteredQuotes = selectedCategory === 'all' ? quotes : quotes.filter(quote => quote.category === selectedCategory);
+        showRandomQuote(filteredQuotes);
+    });
+
     filterQuotes();
 });
