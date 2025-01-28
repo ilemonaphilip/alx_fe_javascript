@@ -8,31 +8,27 @@ let quotes = [
 ];
 
 // Function to fetch quotes from the mock API (simulated server interaction)
-function fetchQuotesFromServer() {
-    // Simulate a server response with JSONPlaceholder (mock data)
-    fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-        .then(serverData => {
-            // Simulating that each server post is a quote (replace with actual quote data from your API)
-            const serverQuotes = serverData.map(post => ({
-                text: post.title,
-                category: "General" // Mock category
-            }));
+async function fetchQuotesFromServer() {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const serverData = await response.json();
 
-            // Handle syncing and conflict resolution
-            syncQuotesWithServer(serverQuotes);
-        })
-        .catch(error => {
-            console.error('Error fetching quotes from server:', error);
-        });
+        // Simulating that each server post is a quote (replace with actual quote data from your API)
+        const serverQuotes = serverData.map(post => ({
+            text: post.title,
+            category: "General" // Mock category
+        }));
+
+        // Handle syncing and conflict resolution
+        syncQuotesWithServer(serverQuotes);
+    } catch (error) {
+        console.error('Error fetching quotes from server:', error);
+    }
 }
 
 // Function to sync local quotes with server data
 function syncQuotesWithServer(serverQuotes) {
     const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
-
-    // Compare local and server quotes
-    const mergedQuotes = [...serverQuotes];
 
     // Merge the data (Server data takes precedence in case of conflict)
     serverQuotes.forEach(serverQuote => {
