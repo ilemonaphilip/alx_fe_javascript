@@ -46,7 +46,7 @@ function syncQuotesWithServer(serverQuotes) {
     localStorage.setItem('quotes', JSON.stringify(localQuotes));
 
     // Optionally notify the user about the sync
-    alert('Quotes synchronized with the server.');
+    alert('Quotes synced with server!');
     populateCategories();
     filterQuotes();
 }
