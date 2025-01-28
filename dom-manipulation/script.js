@@ -45,15 +45,15 @@ function createAddQuoteForm() {
 // Step 3: Function to display a random quote
 function showRandomQuote() {
     if (quotes.length === 0) {
-        quoteDisplay.textContent = "No quotes available!";
+        quoteDisplay.innerHTML = "No quotes available!";
         return;
     }
 
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
 
-    // Update textContent
-    quoteDisplay.textContent = `"${randomQuote.text}" - ${randomQuote.category}`;
+    // Use innerHTML to update content dynamically
+    quoteDisplay.innerHTML = `"${randomQuote.text}" - <strong>${randomQuote.category}</strong>`;
 }
 
 // Step 4: Function to add a new quote
