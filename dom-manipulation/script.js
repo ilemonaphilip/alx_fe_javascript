@@ -51,6 +51,31 @@ function syncQuotesWithServer(serverQuotes) {
     filterQuotes();
 }
 
+// Function to post a new quote to the server
+async function postNewQuoteToServer(newQuote) {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: newQuote.text,
+                body: newQuote.category,
+            })
+        });
+
+        if (response.ok) {
+            const jsonResponse = await response.json();
+            console.log('Quote successfully posted to server:', jsonResponse);
+        } else {
+            console.error('Failed to post quote to server');
+        }
+    } catch (error) {
+        console.error('Error posting quote to server:', error);
+    }
+}
+
 // Function to periodically fetch data from the server every 10 minutes (600000 ms)
 setInterval(fetchQuotesFromServer, 600000); // Fetch every 10 minutes
 
@@ -105,7 +130,7 @@ function showRandomQuote(filteredQuotes) {
 }
 
 // Function to add a new quote (also updates categories)
-function addQuote() {
+async function addQuote() {
     const newQuoteText = document.getElementById('newQuoteText').value;
     const newQuoteCategory = document.getElementById('newQuoteCategory').value;
     
@@ -115,6 +140,9 @@ function addQuote() {
     
     // Save the updated quotes array to local storage
     saveQuotes();
+
+    // Post new quote to the server (simulating server interaction)
+    await postNewQuoteToServer(newQuote);
     
     // Update categories in the dropdown
     populateCategories();
