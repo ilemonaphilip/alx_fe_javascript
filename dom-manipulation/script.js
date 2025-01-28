@@ -18,8 +18,11 @@ function showRandomQuote() {
         quoteDisplay.textContent = "No quotes available!";
         return;
     }
+
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
+
+    // Update textContent instead of innerHTML
     quoteDisplay.textContent = `"${randomQuote.text}" - ${randomQuote.category}`;
 }
 
